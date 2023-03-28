@@ -6,7 +6,8 @@ public class R1 {
         db1.open("jdbc:mysql://localhost:3306/tennis", "root", "");
 
         Database db2 = new Database();
-        db2.open("jdbc:mysql://localhost:3306/sponsor", "anonyme", "anonyme");
+        db2.open("jdbc:mysql://localhost:3307/sponsor", "anonyme", "anonyme");
+
 
         String r1 = "SELECT joueur.NOM, joueur.NATIONALITE, sponsor.NOM FROM tennis.JOUEUR joueur "
                 + "LEFT JOIN sponsor.SPONSOR sponsor ON sponsor.NATIONALITE = joueur.NATIONALITE "
@@ -17,6 +18,6 @@ public class R1 {
         db1.endRequest();
 
         db1.close();
-        db2.close();
+        //db2.close();
     }
 }

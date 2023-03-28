@@ -3,11 +3,19 @@ package sn.ept.git;
 import java.sql.*;
 
 public class Database {
+    /**
+     * Cette classe a ete cree pour gerer relatif à la connexion à la base
+     * et aux requetes et affichages de resultat de requetes pour eviter toute
+     * repetition dans le code.
+     */
     private ResultSet result;
     private Statement lecture;
     private Connection connexion;
 
     public void open() {
+        /**
+         * Fonction pour creer l'objet connexion
+         */
         try {
             Class c = Class.forName("com.mysql.cj.jdbc.Driver");
             Driver pilote = (Driver) c.newInstance();
@@ -20,6 +28,10 @@ public class Database {
     }
 
     public void open(String url, String user, String password) {
+        /**
+         * Surcharge fonction pour creer l'objet connexion
+         * à partir d'information passées en paramètres
+         */
         try {
             Class c = Class.forName("com.mysql.cj.jdbc.Driver");
             Driver pilote = (Driver) c.newInstance();
@@ -29,12 +41,19 @@ public class Database {
     }
 
     public void close() {
+        /**
+         * Fonction pour fermer l'objet connexion
+         */
         try {
             connexion.close();
         } catch(Exception e) { e.printStackTrace(); }
     }
 
     public void executeRequest(String request) {
+        /**
+         * Fonction executer une requete passee en
+         * parametre sur l'instance de bd
+         */
         try {
             lecture = connexion.createStatement();
             result = lecture.executeQuery(request);
@@ -42,6 +61,10 @@ public class Database {
     }
 
     public void endRequest() {
+        /**
+         * Fonction pour fermer les objets liees à la
+         * requete qui vient d'etre executee
+         */
         try {
             result.close();
             lecture.close();
@@ -49,6 +72,9 @@ public class Database {
     }
 
     public void showResult() {
+        /**
+         * Fonction pour afficher les resultats
+         */
         try {
             ResultSetMetaData metaData = result.getMetaData();
             int columnsNumber = metaData.getColumnCount();
